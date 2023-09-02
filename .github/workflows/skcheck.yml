@@ -3,7 +3,7 @@ name: checkin
 on:
   push:
   schedule:
-    - cron: '0 4 * * *'
+    - cron: '0 12 * * *'
 
 jobs:
   SKLandCheckIn:
@@ -19,4 +19,4 @@ jobs:
         UID: ${{ secrets.UID }}
         CRED: ${{ secrets.CRED }}
       run: |
-        python checkin.py 
+        python checkin.py ${UID} ${CRED}
