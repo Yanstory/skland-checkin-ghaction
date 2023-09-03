@@ -60,7 +60,8 @@ for cookie_line in cookie_lines:
                 "resource").get("type") + ")")
             print("奖励类型为：" + award.get("type"))
     else:
-        FAIL_SIGN = True
+        if sign_response_json["message"]!="请勿重复签到！":
+            FAIL_SIGN = True
         print(sign_response_json)
         print("签到失败，请检查以上信息...")
 
