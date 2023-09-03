@@ -67,8 +67,10 @@ for cookie_line in cookie_lines:
     # 休眠指定时间后，继续下个账户
     time.sleep(SLEEP_TIME)
 
+class AbnormalChekinException(Exception):
+    pass
+
 if FAIL_SIGN:
-    print("存在签到失败的账号，请检查信息")
-    sys.exit()
+    raise AbnormalChekinException("存在签到失败的账号，请检查信息")
 else:
     print("程序运行结束")
