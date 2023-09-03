@@ -10,6 +10,7 @@ SIGN_URL = "https://zonai.skland.com/api/v1/game/attendance"
 SUCCESS_CODE = 0
 # 休眠三秒继续其他账号签到
 SLEEP_TIME = 3
+FAIL_SIGN = False
 
 # 读取cookie
 cookie_lines = sys.argv[1].split(";;")
@@ -59,10 +60,15 @@ for cookie_line in cookie_lines:
                 "resource").get("type") + ")")
             print("奖励类型为：" + award.get("type"))
     else:
+        FAIL_SIGN = True
         print(sign_response_json)
         print("签到失败，请检查以上信息...")
 
     # 休眠指定时间后，继续下个账户
     time.sleep(SLEEP_TIME)
 
-print("程序运行结束")
+if FAIL_SIGN:
+    print("存在签到失败的账号，请检查信息")
+    sys.exit()
+else:
+    print("程序运行结束")
