@@ -2,7 +2,7 @@ name: checkin
 
 on:
   schedule:
-    - cron: '0 4 * * *'
+    - cron: '0 20 * * *'
 
 jobs:
   SKLandCheckIn:
