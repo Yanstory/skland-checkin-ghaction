@@ -11,19 +11,18 @@ SUCCESS_CODE = 0
 # 休眠三秒继续其他账号签到
 SLEEP_TIME = 3
 FAIL_SIGN = False
-
+Cred = sys.argv[2].split(";;")
 # 读取cookie
 cookie_lines = sys.argv[1].split(";;")
 print("已读取" + str(len(cookie_lines)) + "个目标")
 print(str(SLEEP_TIME) + "秒后进行签到...")
 time.sleep(SLEEP_TIME)
-
+i = 0
 # 遍历cookie
 for cookie_line in cookie_lines:
-
     # 准备签到信息
     uid = cookie_line
-    signing_cookie = sys.argv[2].strip()
+    signing_cookie = Cred[i].strip()
     headers = {
         "user-agent": "Skland/1.0.1 (com.hypergryph.skland; build:100001014; Android 25; ) Okhttp/4.11.0",
         "cred": signing_cookie
@@ -32,7 +31,7 @@ for cookie_line in cookie_lines:
         "uid": str(uid),
         "gameId": 1
     }
-
+    i = i + 1
     # 签到请求
     sign_response = requests.post(headers=headers, url=SIGN_URL, data=data)
 
