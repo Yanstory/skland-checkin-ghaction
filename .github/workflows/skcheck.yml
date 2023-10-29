@@ -18,6 +18,7 @@ jobs:
     - name: Prepare module
       run: |
         pip3 install requests
+        pip3 install httpx
     - name: Run Checkin
       env:
         UID: ${{ secrets.UID }}
