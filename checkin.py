@@ -148,7 +148,8 @@ async def do_sign(uid: str, cred_resp: dict):
     for i in binding:
         if i["uid"] == uid:
             data["gameId"] = i["channelMasterId"]
-            drname = "Dr." + i["nickName"]
+            #drname = "Dr." + i["nickName"]
+            drname = "Dr.????#????"
             server = i["channelName"]
             break
 
@@ -192,7 +193,9 @@ async def main():
     print("已读取" + str(len(uid_lines)) + "个目标")
     print(str(SLEEP_TIME) + "秒后进行签到...")
     time.sleep(SLEEP_TIME)
+    number = 1
     for uid_line in uid_lines:
+        print("当前目标：%d"%(number))
         res = await run_sign(uid_line, sys.argv[2].strip())
         if not res["status"]:
             if "请勿重复签到！" in res["text"]:
@@ -203,6 +206,7 @@ async def main():
         else:
             print(res["text"])
         time.sleep(SLEEP_TIME)
+        number += 1
         
 asyncio.run(main())
 if FAIL_SIGN:
